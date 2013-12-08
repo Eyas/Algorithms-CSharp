@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Graphs.Immutable.Unweighted
+namespace Graphs.Unweighted
 {
     /**
      * Interface for an Unweighted Directed Graph

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Graphs.Immutable.Unweighted
+namespace Graphs.Unweighted.Immutable
 {
     public class AdjacencyMatrixGraph : IUnweightedGraph
     {

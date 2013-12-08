@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Graphs.Mutable.Unweighted
+namespace Graphs.Unweighted.Mutable
 {
-    public class AdjacencyMatrixGraph : IUnweightedGraph
+    public class AdjacencyMatrixGraph : IUnweightedMutableGraph
     {
         private bool[,] adjacency;
         private Vertex[] vertices;

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace Graphs.Mutable.Unweighted
+namespace Graphs.Unweighted.Mutable
 {
-    class UndirectedGraph : IUnweightedGraph
+    class UndirectedGraph : IUnweightedMutableGraph
     {
-        private readonly IUnweightedGraph _graph;
-        public UndirectedGraph(IUnweightedGraph graph)
+        private readonly IUnweightedMutableGraph _graph;
+        public UndirectedGraph(IUnweightedMutableGraph graph)
         {
             _graph = graph;
         }

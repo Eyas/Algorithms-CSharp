@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Graphs.Immutable.Weighted
+namespace Graphs.Weighted.Immutable
 {
     public class AdjacencyMatrixGraph : IWeightedGraph
     {

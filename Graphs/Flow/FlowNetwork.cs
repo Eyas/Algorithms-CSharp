@@ -7,12 +7,12 @@ namespace Graphs.Flow
         public Vertex s
         {
             private set;
-            public get;
+            get;
         }
         public Vertex t
         {
             private set;
-            public get;
+            get;
         }
         private IGraph _graph;
         public FlowNetwork(IGraph graph, Vertex source, Vertex target)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Graphs.Immutable.Weighted
+namespace Graphs.Weighted
 {
     /**
      * Interface for a Weighted Directed Graph
