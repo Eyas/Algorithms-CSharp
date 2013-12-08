@@ -2,7 +2,7 @@
 
 namespace Graphs.Flow
 {
-    interface IFlowNetwork
+    class FlowNetwork
     {
     }
 }
