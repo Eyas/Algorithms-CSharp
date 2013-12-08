@@ -33,8 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Builder\UnweightedGraphBuilder.cs" />
+    <Compile Include="Builder\WeightedGraphBuilder.cs" />
     <Compile Include="Flow\IFlowNetwork.cs" />
     <Compile Include="IGraph.cs" />
+    <Compile Include="Immutable\Unweighted\AdjacencyMatrixGraph.cs" />
+    <Compile Include="Immutable\Unweighted\IUnweightedGraph.cs" />
+    <Compile Include="Immutable\Weighted\AdjacencyMatrixGraph.cs" />
+    <Compile Include="Immutable\Weighted\IWeightedGraph.cs" />
     <Compile Include="Mutable\IMutableGraph.cs" />
     <Compile Include="Mutable\Unweighted\AdjacencyListGraph.cs" />
     <Compile Include="Mutable\Unweighted\AdjacencyMatrixGraph.cs" />
@@ -45,6 +51,7 @@
     <Compile Include="Mutable\Unweighted\IUnweightedGraph.cs" />
     <Compile Include="Mutable\Weighted\IWeightedGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Edge.cs" />
     <Compile Include="Vertex.cs" />
     <Compile Include="Mutable\Weighted\UndirectedGraph.cs" />
     <Compile Include="VertexNotFoundException.cs" />

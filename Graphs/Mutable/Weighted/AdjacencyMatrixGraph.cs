@@ -6,8 +6,7 @@ namespace Graphs.Mutable.Weighted
 {
     public class AdjacencyMatrixGraph : IWeightedGraph
     {
-        private bool[,] adjacency;
-        private int[,] weights;
+        private int?[,] adjacency;
         private Vertex[] vertices;
         private Dictionary<Vertex, int> indices = new Dictionary<Vertex, int>();
         private int _capacity;
@@ -17,8 +16,7 @@ namespace Graphs.Mutable.Weighted
         {
             if (capacity == 0) throw new ArgumentException();
 
-            weights = new int[capacity, capacity];
-            adjacency = new bool[capacity, capacity];
+            adjacency = new int?[capacity, capacity];
             vertices = new Vertex[capacity];
             _capacity = capacity;
             _used = 0;
@@ -34,19 +32,16 @@ namespace Graphs.Mutable.Weighted
             if (_used > _capacity)
             {
                 _capacity *= 2;
-                int[,] oldWeights = weights;
-                bool[,] oldAdjacency = adjacency;
-                weights = new int[_capacity, _capacity];
-                adjacency = new bool[_capacity, _capacity];
+                int?[,] oldAdjacency = adjacency;
+                adjacency = new int?[_capacity, _capacity];
                 Vertex[] oldVertices = vertices;
                 vertices = new Vertex[_capacity];
 
-                for (int i = 0; i < oldWeights.Length; i++)
+                for (int i = 0; i < oldAdjacency.Length; i++)
                 {
                     vertices[i] = oldVertices[i];
-                    for (int j = 0; j < oldWeights.Length; j++)
+                    for (int j = 0; j < oldAdjacency.Length; j++)
                     {
-                        weights[i, j] = oldWeights[i, j];
                         adjacency[i, j] = oldAdjacency[i, j];
                     }
                 }
@@ -58,7 +53,7 @@ namespace Graphs.Mutable.Weighted
         }
         public bool HasEdge(Vertex u, Vertex v)
         {
-            return adjacency[indices[u], indices[v]];
+            return adjacency[indices[u], indices[v]].HasValue;
         }
         public List<Vertex> Neighbors(Vertex u)
         {
@@ -67,26 +62,25 @@ namespace Graphs.Mutable.Weighted
 
             for (int i = 0; i < _used; i++ )
             {
-                if (adjacency[_u, i])
+                if (adjacency[_u, i].HasValue)
                     neighbors.Add(vertices[i]);
             }
             return neighbors;
         }
         public void SetEdge(Vertex u, Vertex v, int weight)
         {
-            adjacency[indices[u], indices[v]] = true;
-            weights[indices[u], indices[v]] = weight;
+            adjacency[indices[u], indices[v]] = weight;
         }
         public int GetEdge(Vertex u, Vertex v)
         {
-            if (!adjacency[indices[u], indices[v]])
+            if (!adjacency[indices[u], indices[v]].HasValue)
                 throw new EdgeNotFoundException();
 
-            return weights[indices[u], indices[v]];
+            return adjacency[indices[u], indices[v]].Value;
         }
         public void RemoveEdge(Vertex u, Vertex v)
         {
-            adjacency[indices[u], indices[v]] = false;
+            adjacency[indices[u], indices[v]] = null;
         }
 
     }
