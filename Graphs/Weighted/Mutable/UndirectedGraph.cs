@@ -39,5 +39,9 @@ namespace Graphs.Weighted.Mutable
         {
             _graph.RemoveVertex(v);
         }
+        public IEnumerable<Vertex> Vertices()
+        {
+            return _graph.Vertices();
+        }
     }
 }

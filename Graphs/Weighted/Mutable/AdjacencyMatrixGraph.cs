@@ -82,6 +82,9 @@ namespace Graphs.Weighted.Mutable
         {
             adjacency[indices[u], indices[v]] = null;
         }
-
+        public IEnumerable<Vertex> Vertices()
+        {
+            return (IEnumerable<Vertex>)vertices.Clone();
+        }
     }
 }

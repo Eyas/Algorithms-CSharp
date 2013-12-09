@@ -79,6 +79,10 @@ namespace Graphs.Weighted.Mutable
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
             if (!vertices[u].HasEdge(v)) vertices[u].RemoveEdge(v);
         }
+        public IEnumerable<Vertex> Vertices()
+        {
+            return vertices.Keys;
+        }
 
     }
 }

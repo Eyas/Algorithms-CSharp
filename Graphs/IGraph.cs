@@ -10,5 +10,6 @@ namespace Graphs
     {
         bool HasEdge(Vertex u, Vertex v);
         List<Vertex> Neighbors(Vertex u);
+        IEnumerable<Vertex> Vertices();
     }
 }

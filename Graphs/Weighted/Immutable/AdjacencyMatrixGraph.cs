@@ -45,6 +45,9 @@ namespace Graphs.Weighted.Immutable
             }
             return neighbors;
         }
-
+        public IEnumerable<Vertex> Vertices()
+        {
+            return (IEnumerable<Vertex>)vertices.Clone();
+        }
     }
 }
