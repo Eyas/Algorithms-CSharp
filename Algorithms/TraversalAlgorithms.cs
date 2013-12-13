@@ -8,10 +8,10 @@ namespace Algorithms
     {
         public static IEnumerable<Vertex> BreadthFirstGraphTraversal(
             IGraph graph,
-            Vertex start)
+            Vertex source)
         {
             Queue<Vertex> toVisit = new Queue<Vertex>();
-            toVisit.Enqueue(start);
+            toVisit.Enqueue(source);
             while (toVisit.Count > 0)
             {
                 Vertex v = toVisit.Dequeue();
@@ -24,10 +24,10 @@ namespace Algorithms
         }
         public static IEnumerable<Vertex> DepthFirstGraphTraversal(
             IGraph graph,
-            Vertex start)
+            Vertex source)
         {
             Stack<Vertex> toVisit = new Stack<Vertex>();
-            toVisit.Push(start);
+            toVisit.Push(source);
             while (toVisit.Count > 0)
             {
                 Vertex v = toVisit.Pop();
@@ -41,12 +41,12 @@ namespace Algorithms
 
         public static IEnumerable<Vertex> BreadthFirstTreeTraversal(
             IGraph graph,
-            Vertex start)
+            Vertex source)
         {
             Queue<Vertex> toVisit = new Queue<Vertex>();
             HashSet<Vertex> visited = new HashSet<Vertex>();
-            toVisit.Enqueue(start);
-            visited.Add(start);
+            toVisit.Enqueue(source);
+            visited.Add(source);
             while (toVisit.Count > 0)
             {
                 Vertex v = toVisit.Dequeue();
@@ -63,12 +63,12 @@ namespace Algorithms
         }
         public static IEnumerable<Vertex> DepthFirstTreeTraversal(
             IGraph graph,
-            Vertex start)
+            Vertex source)
         {
             Stack<Vertex> toVisit = new Stack<Vertex>();
             HashSet<Vertex> visited = new HashSet<Vertex>();
-            toVisit.Push(start);
-            visited.Add(start);
+            toVisit.Push(source);
+            visited.Add(source);
             while (toVisit.Count > 0)
             {
                 Vertex v = toVisit.Pop();
