@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Graphs.Weighted.Mutable;
 
 namespace Graphs.Flow
 {
@@ -14,10 +15,13 @@ namespace Graphs.Flow
             private set;
             get;
         }
-        private IGraph _graph;
-        public FlowNetwork(IGraph graph, Vertex source, Vertex target)
+        private IWeightedMutableGraph _graph;
+        public FlowNetwork(IWeightedMutableGraph graph, Vertex source, Vertex target)
         {
-
+            _graph = graph;
+            s = source;
+            t = target;
         }
+
     }
 }
