@@ -7,7 +7,7 @@ namespace Algorithms
     public static class TraversalAlgorithms
     {
         public static IEnumerable<Vertex> BreadthFirstGraphTraversal(
-            IGraph graph,
+            this IGraph graph,
             Vertex source)
         {
             Queue<Vertex> toVisit = new Queue<Vertex>();
@@ -23,7 +23,7 @@ namespace Algorithms
             }
         }
         public static IEnumerable<Vertex> DepthFirstGraphTraversal(
-            IGraph graph,
+            this IGraph graph,
             Vertex source)
         {
             Stack<Vertex> toVisit = new Stack<Vertex>();
@@ -40,7 +40,7 @@ namespace Algorithms
         }
 
         public static IEnumerable<Vertex> BreadthFirstTreeTraversal(
-            IGraph graph,
+            this IGraph graph,
             Vertex source)
         {
             Queue<Vertex> toVisit = new Queue<Vertex>();
@@ -61,8 +61,8 @@ namespace Algorithms
                 }
             }
         }
-        public static IEnumerable<Vertex> DepthFirstTreeTraversal(
-            IGraph graph,
+        public static IEnumerable<Vertex> PreOrderTreeTraversal(
+            this IGraph graph,
             Vertex source)
         {
             Stack<Vertex> toVisit = new Stack<Vertex>();
@@ -83,5 +83,6 @@ namespace Algorithms
                 }
             }
         }
+
     }
 }
