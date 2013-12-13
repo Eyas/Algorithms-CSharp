@@ -2,7 +2,7 @@
 
 namespace Graphs.Weighted.Mutable
 {
-    class UndirectedGraph : IWeightedMutableGraph
+    public class UndirectedGraph : IWeightedMutableGraph
     {
         private readonly IWeightedMutableGraph _graph;
         public UndirectedGraph(IWeightedMutableGraph graph)

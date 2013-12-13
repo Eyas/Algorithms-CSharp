@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    interface IGraph
+    public interface IGraph
     {
         bool HasEdge(Vertex u, Vertex v);
         List<Vertex> Neighbors(Vertex u);

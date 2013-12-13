@@ -5,7 +5,7 @@ namespace Graphs.Unweighted
     /**
      * Interface for an Unweighted Directed Graph
      */
-    interface IUnweightedGraph : IGraph
+    public interface IUnweightedGraph : IGraph
     {
     }
 }
