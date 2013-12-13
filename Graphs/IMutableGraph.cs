@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    interface IMutableGraph : IGraph
+    public interface IMutableGraph : IGraph
     {
         void AddVertex(Vertex v);
         void RemoveVertex(Vertex v);
