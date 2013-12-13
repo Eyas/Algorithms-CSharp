@@ -7,7 +7,11 @@ namespace Algorithms
 {
     public static class FlowAlgorithms
     {
-        public static int FindMaxFlow(this IWeightedGraph graph, Vertex source, Vertex target, out IWeightedGraph legalFlows)
+        public static int FindMaxFlow(
+            this IWeightedGraph graph,
+            Vertex source,
+            Vertex target,
+            out IWeightedGraph legalFlows)
         {
             legalFlows = null;
             return 0;
