@@ -38,7 +38,6 @@ namespace Algorithms
                 }
             }
         }
-
         public static IEnumerable<Vertex> BreadthFirstTreeTraversal(
             this IGraph graph,
             Vertex source)
