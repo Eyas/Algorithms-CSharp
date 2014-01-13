@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphs", "Graphs\Graphs.csproj", "{136F1B34-FB48-402B-9CAD-81F9EBC93809}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{6EB5AE37-BF69-4352-83FD-C83E5671C2E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{136F1B34-FB48-402B-9CAD-81F9EBC93809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136F1B34-FB48-402B-9CAD-81F9EBC93809}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{136F1B34-FB48-402B-9CAD-81F9EBC93809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB5AE37-BF69-4352-83FD-C83E5671C2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB5AE37-BF69-4352-83FD-C83E5671C2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB5AE37-BF69-4352-83FD-C83E5671C2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB5AE37-BF69-4352-83FD-C83E5671C2E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
