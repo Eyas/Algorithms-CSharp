@@ -34,7 +34,7 @@ namespace Graphs.Unweighted.Immutable
             List<Vertex> neighbors = new List<Vertex>();
             int _u = indices[u];
 
-            for (int i = 0; i < adjacency.Length; i++ )
+            for (int i = 0; i < vertices.Length; i++ )
             {
                 if (adjacency[_u, i])
                     neighbors.Add(vertices[i]);

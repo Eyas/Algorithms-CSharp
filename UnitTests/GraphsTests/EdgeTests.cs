@@ -50,6 +50,8 @@ namespace UnitTests.GraphsTests
             Assert.AreEqual(new Edge(u, v, five), uv5);
             Assert.AreEqual(new Edge(u, v, six), uv5);
 
+            Assert.AreEqual(new Edge(new Vertex("vertex1"), new Vertex("vertex2")), uv);
+
             Assert.AreNotEqual(uv, vw);
             Assert.AreNotEqual(uv, vu);
             Assert.AreNotEqual(vw, vu);

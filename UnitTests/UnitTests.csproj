@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="GraphsTests\IGraphHelper.cs" />
     <Compile Include="GraphsTests\EdgeTests.cs" />
+    <Compile Include="GraphsTests\Unweighted\Immutable\AdjacencyMatrixGraphTests.cs" />
     <Compile Include="GraphsTests\VertexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />
-    <Folder Include="GraphsTests\Unweighted\Immutable\" />
     <Folder Include="GraphsTests\Unweighted\Mutable\" />
     <Folder Include="GraphsTests\Weighted\Immutable\" />
     <Folder Include="GraphsTests\Weighted\Mutable\" />

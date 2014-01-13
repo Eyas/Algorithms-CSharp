@@ -37,10 +37,10 @@ namespace Graphs.Unweighted.Mutable
                 Vertex[] oldVertices = vertices;
                 vertices = new Vertex[_capacity];
 
-                for (int i = 0; i < oldAdjacency.Length; i++)
+                for (int i = 0; i < oldVertices.Length; i++)
                 {
                     vertices[i] = oldVertices[i];
-                    for (int j = 0; j < oldAdjacency.Length; j++)
+                    for (int j = 0; j < oldVertices.Length; j++)
                     {
                         adjacency[i, j] = oldAdjacency[i, j];
                     }
