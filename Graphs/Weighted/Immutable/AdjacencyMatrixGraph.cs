@@ -22,6 +22,10 @@ namespace Graphs.Weighted.Immutable
 
             foreach (Edge e in E)
             {
+                if (!e.weight.HasValue)
+                {
+                    throw new ArgumentException("Unweighted edge provided in constructor of weighted graph.");
+                }
                 adjacency[indices[e.u], indices[e.v]] = e.weight;
             }
         }
