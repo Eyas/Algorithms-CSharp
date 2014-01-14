@@ -56,7 +56,7 @@ namespace UnitTests.GraphsTests.Weighted.Immutable
             new AdjacencyMatrixGraph(V, E);
         }
         [TestMethod]
-        public void IWAMGraphHasEdge_Test()
+        public void IWAMGraphHasEdge_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
 
@@ -93,7 +93,7 @@ namespace UnitTests.GraphsTests.Weighted.Immutable
             graph.GetEdge(v, u);
         }
         [TestMethod]
-        public void IWAMGraphNeighborsTest()
+        public void IWAMGraphNeighbors_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
             List<Vertex> uNeighbors = graph.Neighbors(u);
@@ -111,7 +111,7 @@ namespace UnitTests.GraphsTests.Weighted.Immutable
             Assert.AreEqual(0, zNeighbors.Count);
         }
         [TestMethod]
-        public void IWAMGraphVerticesTest()
+        public void IWAMGraphVertices_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
             HashSet<Vertex> vertices = new HashSet<Vertex>(graph.Vertices());

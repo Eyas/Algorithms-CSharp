@@ -22,14 +22,14 @@ namespace UnitTests.GraphsTests.Unweighted.Immutable
         #endregion
 
         [TestMethod]
-        public void IUAMGraphEmptyConstructorTest()
+        public void IUAMGraphConstructor_Empty_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(new HashSet<Vertex>(), new HashSet<Edge>());
             Assert.IsNotNull(graph, "Empty graph was not created");
         }
         [TestMethod]
         [ExpectedException(typeof(KeyNotFoundException))]
-        public void IUAMGraphIllegalConstructorTest()
+        public void IUAMGraphConstructor_MissingVertex_Fails()
         {
             HashSet<Vertex> V = new HashSet<Vertex>();
             V.Add(u);
@@ -42,7 +42,7 @@ namespace UnitTests.GraphsTests.Unweighted.Immutable
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(V, E);
         }
         [TestMethod]
-        public void IUAMGraphHasEdgeTest()
+        public void IUAMGraphHasEdge_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
 
@@ -58,7 +58,7 @@ namespace UnitTests.GraphsTests.Unweighted.Immutable
             Assert.IsFalse(graph.HasEdge(u, x));
         }
         [TestMethod]
-        public void IUAMGraphNeighborsTest()
+        public void IUAMGraphNeighbors_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
             List<Vertex> uNeighbors = graph.Neighbors(u);
@@ -76,7 +76,7 @@ namespace UnitTests.GraphsTests.Unweighted.Immutable
             Assert.AreEqual(0, zNeighbors.Count);
         }
         [TestMethod]
-        public void IUAMGraphVerticesTest()
+        public void IUAMGraphVertices_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
             HashSet<Vertex> vertices = new HashSet<Vertex>(graph.Vertices());
