@@ -25,8 +25,6 @@ namespace Graphs.Unweighted.Mutable
         {
             if (indices.ContainsKey(v)) return;
 
-            indices[v] = _used;
-            vertices[_used] = v;
             _used++;
 
             if (_used > _capacity)
@@ -46,6 +44,10 @@ namespace Graphs.Unweighted.Mutable
                     }
                 }
             }
+
+            indices[v] = _used - 1;
+            vertices[_used - 1] = v;
+
         }
         public void RemoveVertex(Vertex v)
         {
@@ -78,7 +80,7 @@ namespace Graphs.Unweighted.Mutable
         }
         public IEnumerable<Vertex> Vertices()
         {
-            return (IEnumerable<Vertex>)vertices.Clone();
+            return vertices.Where((u) => { return u != null; }); ;
         }
     }
 }
