@@ -21,7 +21,7 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
         private static Vertex z = new Vertex("z");
         #endregion
 
-        [TestMethod]
+      [TestMethod]
         public void MUAMGraphConstructor_Empty_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
@@ -121,6 +121,53 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             Assert.IsFalse(graph.HasEdge(u, u));
         }
         [TestMethod]
+        public void MUAMGraphRemoveVertex_SimpleRemove_Succeeds()
+        {
+            // u --> v --> w   x <---> y --> z
+            // |           ^                 ^
+            //  \---------/-----------------/
+            //  will remove 'v'
+
+            AdjacencyMatrixGraph graph = CreateGraph();
+
+            graph.RemoveVertex(v);
+            Assert.IsFalse(graph.Vertices().Contains(v));
+            Assert.IsFalse(graph.Neighbors(u).Contains(v));
+        }
+        [TestMethod]
+        public void MUAMGraphRemoveVertex_RemoveThenAddAnother_IsClean()
+        {
+            // An 'Add' after a 'Remove' reuses the old index, make
+            // sure there is no leftover cruft.
+
+            // u --> v --> w   x <---> y --> z
+            // |           ^                 ^
+            //  \---------/-----------------/
+            //  will remove 'v'
+            //  and add 't'
+
+            AdjacencyMatrixGraph graph = CreateGraph();
+
+            graph.RemoveVertex(v);
+            graph.AddVertex(t);
+
+            Assert.IsFalse(graph.Vertices().Contains(v));
+            Assert.IsFalse(graph.Neighbors(u).Contains(t));
+            Assert.AreEqual(0, graph.Neighbors(t).Count);
+        }
+        [TestMethod]
+        public void MUAMGraphSetEdge_UnconnectedGraph_Succeeds()
+        {
+            AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
+            graph.AddVertex(u);
+            graph.AddVertex(v);
+
+            graph.SetEdge(u, v);
+
+            Assert.IsTrue(graph.HasEdge(u, v));
+            Assert.IsFalse(graph.HasEdge(v, u));
+        }
+        [TestMethod]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void MUAMGraphSetEdge_MissingVertex_Fails()
         {
@@ -129,6 +176,19 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             graph.AddVertex(v);
 
             graph.SetEdge(u, t);
+        }
+        [TestMethod]
+        public void MUAMGraphRemoveEdge_SetAndRemove_Succeeds()
+        {
+            AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
+            graph.AddVertex(u);
+            graph.AddVertex(v);
+
+            graph.SetEdge(u, v);
+            graph.RemoveEdge(u, v);
+
+            Assert.IsFalse(graph.HasEdge(u, v));
+            Assert.IsFalse(graph.HasEdge(v, u));
         }
         [TestMethod]
         public void MUAMGraphHasEdge_RegularGraph_Test()
