@@ -20,7 +20,7 @@ namespace Graphs
         IEnumerable<Vertex> Vertices();
     }
 
-    public interface IIncidentsGraph
+    public interface IIncidentsGraph : IGraph
     {
         /// <summary>
         /// Returns the set of vertices u such that there is an edge from u to v.
