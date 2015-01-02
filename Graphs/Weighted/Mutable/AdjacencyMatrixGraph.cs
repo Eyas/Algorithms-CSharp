@@ -67,6 +67,7 @@ namespace Graphs.Weighted.Mutable
                 adjacency[_v, i] = null;
             }
 
+            removed.Push(_v);
             indices.Remove(v);
             vertices[_v] = null;
 

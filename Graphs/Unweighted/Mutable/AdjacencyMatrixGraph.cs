@@ -26,54 +26,53 @@ namespace Graphs.Unweighted.Mutable
         {
             if (indices.ContainsKey(v)) return;
 
-            _used++;
-
             // First, try to reuse a previously removed vertex, if any
             if (removedIndices.Count > 0)
             {
                 int index = removedIndices.Pop();
                 indices[v] = index;
                 vertices[index] = v;
-
+                return;
             }
-            else
-            {
-                // Do we need to grow the adjacency matrix?
-                if (_used > _capacity)
-                {
-                    _capacity *= 2;
-                    bool[,] oldAdjacency = adjacency;
-                    adjacency = new bool[_capacity, _capacity];
-                    Vertex[] oldVertices = vertices;
-                    vertices = new Vertex[_capacity];
 
-                    for (int i = 0; i < oldVertices.Length; i++)
+            indices[v] = _used;
+            vertices[_used] = v;
+            _used++;
+
+            // Do we need to grow the adjacency matrix?
+            if (_used > _capacity)
+            {
+                _capacity *= 2;
+                bool[,] oldAdjacency = adjacency;
+                adjacency = new bool[_capacity, _capacity];
+                Vertex[] oldVertices = vertices;
+                vertices = new Vertex[_capacity];
+
+                for (int i = 0; i < oldVertices.Length; i++)
+                {
+                    vertices[i] = oldVertices[i];
+                    for (int j = 0; j < oldVertices.Length; j++)
                     {
-                        vertices[i] = oldVertices[i];
-                        for (int j = 0; j < oldVertices.Length; j++)
-                        {
-                            adjacency[i, j] = oldAdjacency[i, j];
-                        }
+                        adjacency[i, j] = oldAdjacency[i, j];
                     }
                 }
-
-                indices[v] = _used - 1;
-                vertices[_used - 1] = v;
             }
 
         }
         public void RemoveVertex(Vertex v)
         {
-            int toRemove = indices[v];
-            removedIndices.Push(toRemove);
-            indices.Remove(v);
-            vertices[toRemove] = null;
-            _used--;
-            for (int i = 0; i < _capacity; i++)
+            int _v = indices[v];
+
+            for (int i = 0; i < _used; i++)
             {
-                adjacency[i, toRemove] = false;
-                adjacency[toRemove, i] = false;
+                adjacency[i, _v] = false;
+                adjacency[_v, i] = false;
             }
+
+            removedIndices.Push(_v);
+            indices.Remove(v);
+            vertices[_v] = null;
+
         }
         public bool HasEdge(Vertex u, Vertex v)
         {
