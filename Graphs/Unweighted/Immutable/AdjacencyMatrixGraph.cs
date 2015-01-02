@@ -53,7 +53,7 @@ namespace Graphs.Unweighted.Immutable
         }
         public IEnumerable<Vertex> Vertices()
         {
-            return (IEnumerable<Vertex>)vertices.Clone();
+            return vertices.Where(x => { return x != null; });
         }
     }
 }

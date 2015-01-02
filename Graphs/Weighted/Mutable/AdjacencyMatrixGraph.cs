@@ -9,6 +9,7 @@ namespace Graphs.Weighted.Mutable
         private int?[,] adjacency;
         private Vertex[] vertices;
         private Dictionary<Vertex, int> indices = new Dictionary<Vertex, int>();
+        private Stack<int> removed = new Stack<int>();
         private int _capacity;
         private int _used;
 
@@ -24,6 +25,15 @@ namespace Graphs.Weighted.Mutable
         public void AddVertex(Vertex v)
         {
             if (indices.ContainsKey(v)) return;
+
+            if (removed.Count > 0)
+            {
+                int idx = removed.Pop();
+                indices[v] = idx;
+                vertices[idx] = v;
+
+                return;
+            }
 
             indices[v] = _used;
             vertices[_used] = v;
@@ -49,7 +59,17 @@ namespace Graphs.Weighted.Mutable
         }
         public void RemoveVertex(Vertex v)
         {
-            // TODO
+            int _v = indices[v];
+
+            for (int i = 0; i < _used; i++)
+            {
+                adjacency[i, _v] = null;
+                adjacency[_v, i] = null;
+            }
+
+            indices.Remove(v);
+            vertices[_v] = null;
+
         }
         public bool HasEdge(Vertex u, Vertex v)
         {
@@ -94,7 +114,7 @@ namespace Graphs.Weighted.Mutable
         }
         public IEnumerable<Vertex> Vertices()
         {
-            return (IEnumerable<Vertex>)vertices.Clone();
+            return vertices.Where(x => { return x != null; });
         }
     }
 }
