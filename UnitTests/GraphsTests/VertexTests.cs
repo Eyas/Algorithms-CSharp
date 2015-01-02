@@ -37,8 +37,8 @@ namespace UnitTests.GraphsTests
             Vertex v1 = new Vertex("vertex1");
             Vertex v2 = new Vertex("vertex2");
 
-            Assert.AreEqual("vertex1", v1.ToString(), "ToString Method should generate Name (vertex1).");
-            Assert.AreEqual("vertex2", v2.ToString(), "ToString Method should generate Name (vertex2).");
+            Assert.AreEqual("Vertex[vertex1]", v1.ToString(), "ToString Method should generate Name (vertex1).");
+            Assert.AreEqual("Vertex[vertex2]", v2.ToString(), "ToString Method should generate Name (vertex2).");
         }
     }
 }

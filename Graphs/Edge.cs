@@ -30,7 +30,7 @@ namespace Graphs
         }
         public override string ToString()
         {
-            return new StringBuilder().Append("Edge(").Append(u).Append(',').Append(v).Append(')').ToString();
+            return new StringBuilder().Append("Edge(").Append(u.Name).Append(',').Append(v.Name).Append(')').ToString();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Graphs.Weighted.Mutable
             vertices[_used] = v;
             _used++;
 
-            if (_used > _capacity)
+            if (_used >= _capacity)
             {
                 _capacity *= 2;
                 int?[,] oldAdjacency = adjacency;

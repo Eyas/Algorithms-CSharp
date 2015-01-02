@@ -40,7 +40,7 @@ namespace Graphs.Unweighted.Mutable
             _used++;
 
             // Do we need to grow the adjacency matrix?
-            if (_used > _capacity)
+            if (_used >= _capacity)
             {
                 _capacity *= 2;
                 bool[,] oldAdjacency = adjacency;
@@ -57,6 +57,7 @@ namespace Graphs.Unweighted.Mutable
                     }
                 }
             }
+
 
         }
         public void RemoveVertex(Vertex v)
