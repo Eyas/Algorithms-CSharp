@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Graphs.Weighted.Mutable
 {
-    public class AdjacencyMatrixGraph : IWeightedMutableGraph
+    public class AdjacencyMatrixGraph : IWeightedMutableGraph, IIncidentsGraph
     {
         private int?[,] adjacency;
         private Vertex[] vertices;
@@ -62,6 +62,17 @@ namespace Graphs.Weighted.Mutable
             for (int i = 0; i < _used; i++ )
             {
                 if (adjacency[_u, i].HasValue)
+                    yield return vertices[i];
+            }
+
+        }
+        public IEnumerable<Vertex> Incidents(Vertex v)
+        {
+            int _v = indices[v];
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (adjacency[i, _v].HasValue)
                     yield return vertices[i];
             }
 

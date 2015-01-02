@@ -40,7 +40,17 @@ namespace Graphs.Unweighted.Immutable
             }
 
         }
+        public IEnumerable<Vertex> Incidents(Vertex v)
+        {
+            int _v = indices[v];
 
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (adjacency[i, _v])
+                    yield return vertices[i];
+            }
+
+        }
         public IEnumerable<Vertex> Vertices()
         {
             return (IEnumerable<Vertex>)vertices.Clone();

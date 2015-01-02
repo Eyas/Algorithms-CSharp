@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Graphs.Weighted.Immutable
 {
-    public class AdjacencyMatrixGraph : IWeightedGraph
+    public class AdjacencyMatrixGraph : IWeightedGraph, IIncidentsGraph
     {
         private int?[,] adjacency;
         private Vertex[] vertices;
         private Dictionary<Vertex, int> indices = new Dictionary<Vertex, int>();
 
-        public AdjacencyMatrixGraph(ISet<Vertex> V, ISet<Edge> E)
+        public AdjacencyMatrixGraph(IEnumerable<Vertex> V, IEnumerable<Edge> E)
         {
-            adjacency = new int?[V.Count, V.Count];
             vertices = V.ToArray();
+            adjacency = new int?[vertices.Length, vertices.Length];
 
             for (int i = 0; i < vertices.Length; i++)
             {
@@ -44,6 +44,17 @@ namespace Graphs.Weighted.Immutable
             for (int i = 0; i < vertices.Length; i++ )
             {
                 if (adjacency[_u, i].HasValue)
+                    yield return vertices[i];
+            }
+
+        }
+        public IEnumerable<Vertex> Incidents(Vertex v)
+        {
+            int _v = indices[v];
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (adjacency[i, _v].HasValue)
                     yield return vertices[i];
             }
 

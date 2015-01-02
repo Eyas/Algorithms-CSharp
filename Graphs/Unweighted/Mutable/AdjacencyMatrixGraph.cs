@@ -90,6 +90,17 @@ namespace Graphs.Unweighted.Mutable
             }
 
         }
+        public IEnumerable<Vertex> Incidents(Vertex v)
+        {
+            int _v = indices[v];
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (adjacency[i, _v])
+                    yield return vertices[i];
+            }
+
+        }
         public void SetEdge(Vertex u, Vertex v)
         {
             adjacency[indices[u], indices[v]] = true;
