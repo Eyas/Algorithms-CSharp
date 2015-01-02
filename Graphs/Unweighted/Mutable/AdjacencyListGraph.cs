@@ -50,7 +50,7 @@ namespace Graphs.Unweighted.Mutable
             if (!vertices.ContainsKey(v)) throw new VertexNotFoundException();
             return vertices[u].HasEdge(v);
         }
-        public List<Vertex> Neighbors(Vertex u)
+        public IEnumerable<Vertex> Neighbors(Vertex u)
         {
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
             return vertices[u].Neighbors;

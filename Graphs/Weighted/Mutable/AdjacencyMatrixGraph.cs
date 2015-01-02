@@ -55,17 +55,16 @@ namespace Graphs.Weighted.Mutable
         {
             return adjacency[indices[u], indices[v]].HasValue;
         }
-        public List<Vertex> Neighbors(Vertex u)
+        public IEnumerable<Vertex> Neighbors(Vertex u)
         {
-            List<Vertex> neighbors = new List<Vertex>();
             int _u = indices[u];
 
             for (int i = 0; i < _used; i++ )
             {
                 if (adjacency[_u, i].HasValue)
-                    neighbors.Add(vertices[i]);
+                    yield return vertices[i];
             }
-            return neighbors;
+
         }
         public void SetEdge(Vertex u, Vertex v, int weight)
         {

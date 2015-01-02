@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Graphs
 {
@@ -34,7 +30,7 @@ namespace Graphs
         }
         public override string ToString()
         {
-            return new StringBuilder().Append("Edge(").Append(u).Append(",").Append(v).Append(")").ToString();
+            return new StringBuilder().Append("Edge(").Append(u).Append(',').Append(v).Append(')').ToString();
         }
     }
 }

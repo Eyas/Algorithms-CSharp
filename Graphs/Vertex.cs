@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Graphs
 {
     public class Vertex
     {
-        public string Name { get; private set; }
+        public string Name { get { return _name; } }
 
         public Vertex(string name)
         {
-            Name = name;
+            _name = name;
         }
         public override bool Equals(object obj)
         {
             Vertex other = obj as Vertex;
             if (other == null) return false;
-            return Name.Equals(other.Name);
+            return _name.Equals(other._name);
         }
         public override int GetHashCode()
         {
-            return Name.GetHashCode();
+            return _name.GetHashCode();
         }
         public override string ToString()
         {
-            return Name;
+            return (new StringBuilder()).Append("Vertex[").Append(_name.ToString()).Append(']').ToString();
         }
+
+        private readonly string _name;
+        
     }
 }

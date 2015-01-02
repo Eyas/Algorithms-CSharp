@@ -13,7 +13,7 @@ namespace Graphs.Unweighted.Mutable
         {
             return _graph.HasEdge(u, v);
         }
-        public List<Vertex> Neighbors(Vertex u)
+        public IEnumerable<Vertex> Neighbors(Vertex u)
         {
             return _graph.Neighbors(u);
         }

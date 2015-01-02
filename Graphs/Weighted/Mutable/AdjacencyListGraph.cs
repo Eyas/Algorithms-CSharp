@@ -9,11 +9,11 @@ namespace Graphs.Weighted.Mutable
         private class AdjacentVertices
         {
             private Dictionary<Vertex, int> adjacents = new Dictionary<Vertex, int>();
-            public List<Vertex> Neighbors
+            public IEnumerable<Vertex> Neighbors
             {
                 get
                 {
-                    return adjacents.Keys.ToList<Vertex>();
+                    return adjacents.Keys;
                 }
             }
             public bool HasEdge(Vertex v)
@@ -59,7 +59,7 @@ namespace Graphs.Weighted.Mutable
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
             return vertices[u].HasEdge(v);
         }
-        public List<Vertex> Neighbors(Vertex u)
+        public IEnumerable<Vertex> Neighbors(Vertex u)
         {
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
             return vertices[u].Neighbors;

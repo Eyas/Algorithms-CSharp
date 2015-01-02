@@ -37,17 +37,16 @@ namespace Graphs.Weighted.Immutable
         {
             return adjacency[indices[u], indices[v]].Value;
         }
-        public List<Vertex> Neighbors(Vertex u)
+        public IEnumerable<Vertex> Neighbors(Vertex u)
         {
-            List<Vertex> neighbors = new List<Vertex>();
             int _u = indices[u];
 
             for (int i = 0; i < vertices.Length; i++ )
             {
                 if (adjacency[_u, i].HasValue)
-                    neighbors.Add(vertices[i]);
+                    yield return vertices[i];
             }
-            return neighbors;
+
         }
         public IEnumerable<Vertex> Vertices()
         {

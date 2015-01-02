@@ -45,7 +45,6 @@
     <Compile Include="Unweighted\Mutable\UndirectedGraph.cs" />
     <Compile Include="Weighted\Mutable\AdjacencyMatrixGraph.cs" />
     <Compile Include="Weighted\Mutable\AdjacencyListGraph.cs" />
-    <Compile Include="EdgeNotFoundException.cs" />
     <Compile Include="Unweighted\IUnweightedGraph.cs" />
     <Compile Include="Weighted\IWeightedGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,7 +52,7 @@
     <Compile Include="Vertex.cs" />
     <Compile Include="Weighted\Mutable\IWeightedMutableGraph.cs" />
     <Compile Include="Weighted\Mutable\UndirectedGraph.cs" />
-    <Compile Include="VertexNotFoundException.cs" />
+    <Compile Include="Exceptions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

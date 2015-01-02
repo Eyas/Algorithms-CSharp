@@ -153,7 +153,7 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
 
             Assert.IsFalse(graph.Vertices().Contains(v));
             Assert.IsFalse(graph.Neighbors(u).Contains(t));
-            Assert.AreEqual(0, graph.Neighbors(t).Count);
+            Assert.AreEqual(0, graph.Neighbors(t).Count());
         }
         [TestMethod]
         public void MUAMGraphSetEdge_UnconnectedGraph_Succeeds()
@@ -210,9 +210,9 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
         public void MUAMGraphNeighbors_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
-            List<Vertex> uNeighbors = graph.Neighbors(u);
-            List<Vertex> xNeighbors = graph.Neighbors(x);
-            List<Vertex> zNeighbors = graph.Neighbors(z);
+            IEnumerable<Vertex> uNeighbors = graph.Neighbors(u);
+            IEnumerable<Vertex> xNeighbors = graph.Neighbors(x);
+            IEnumerable<Vertex> zNeighbors = graph.Neighbors(z);
 
             Assert.IsTrue(uNeighbors.Contains(v));
             Assert.IsTrue(uNeighbors.Contains(w));
@@ -222,7 +222,7 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             Assert.IsTrue(xNeighbors.Contains(y));
             Assert.IsFalse(xNeighbors.Contains(u));
 
-            Assert.AreEqual(0, zNeighbors.Count);
+            Assert.AreEqual(0, zNeighbors.Count());
         }
         [TestMethod]
         public void MUAMGraphVertices_RegularGraph_Test()
