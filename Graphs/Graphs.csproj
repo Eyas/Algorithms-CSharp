@@ -39,12 +39,12 @@
     <Compile Include="Unweighted\Immutable\AdjacencyMatrixGraph.cs" />
     <Compile Include="Weighted\Immutable\AdjacencyMatrixGraph.cs" />
     <Compile Include="IMutableGraph.cs" />
-    <Compile Include="Unweighted\Mutable\AdjacencyListGraph.cs" />
+    <Compile Include="Unweighted\Mutable\AdjacencySetGraph.cs" />
     <Compile Include="Unweighted\Mutable\AdjacencyMatrixGraph.cs" />
     <Compile Include="Unweighted\Mutable\IUnweightedMutableGraph.cs" />
     <Compile Include="Unweighted\Mutable\UndirectedGraph.cs" />
     <Compile Include="Weighted\Mutable\AdjacencyMatrixGraph.cs" />
-    <Compile Include="Weighted\Mutable\AdjacencyListGraph.cs" />
+    <Compile Include="Weighted\Mutable\AdjacencySetGraph.cs" />
     <Compile Include="Unweighted\IUnweightedGraph.cs" />
     <Compile Include="Weighted\IWeightedGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

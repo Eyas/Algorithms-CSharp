@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Graphs.Unweighted.Mutable
+namespace Graphs.Weighted.Mutable
 {
-    public class AdjacencyListGraph : IUnweightedMutableGraph
+    public class AdjacencySetGraph : IWeightedMutableGraph
     {
         private class AdjacentVertices
         {
-            private HashSet<Vertex> adjacents = new HashSet<Vertex>();
+            private Dictionary<Vertex, int> adjacents = new Dictionary<Vertex, int>();
             public IEnumerable<Vertex> Neighbors
             {
                 get
                 {
-                    return adjacents;
+                    return adjacents.Keys;
                 }
             }
             public int Count
@@ -25,11 +25,20 @@ namespace Graphs.Unweighted.Mutable
             }
             public bool HasEdge(Vertex v)
             {
-                return adjacents.Contains(v);
+                return adjacents.ContainsKey(v);
             }
-            public void SetEdge(Vertex v)
+            public int GetEdge(Vertex v)
             {
-                adjacents.Add(v);
+                int weight;
+                if (adjacents.TryGetValue(v, out weight))
+                {
+                    return weight;
+                }
+                else { throw new EdgeNotFoundException(); }
+            }
+            public void SetEdge(Vertex v, int weight)
+            {
+                adjacents.Add(v, weight);
             }
             public void RemoveEdge(Vertex v)
             {
@@ -38,6 +47,7 @@ namespace Graphs.Unweighted.Mutable
         }
 
         private Dictionary<Vertex, AdjacentVertices> vertices = new Dictionary<Vertex, AdjacentVertices>();
+
         public void AddVertex(Vertex v)
         {
             vertices[v] = new AdjacentVertices();
@@ -45,7 +55,7 @@ namespace Graphs.Unweighted.Mutable
         public void RemoveVertex(Vertex v)
         {
             vertices.Remove(v);
-            foreach (AdjacentVertices adjacencyList in vertices.Values)
+            foreach(AdjacentVertices adjacencyList in vertices.Values)
             {
                 if (adjacencyList.HasEdge(v))
                     adjacencyList.RemoveEdge(v);
@@ -54,7 +64,6 @@ namespace Graphs.Unweighted.Mutable
         public bool HasEdge(Vertex u, Vertex v)
         {
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
-            if (!vertices.ContainsKey(v)) throw new VertexNotFoundException();
             return vertices[u].HasEdge(v);
         }
         public IEnumerable<Vertex> Neighbors(Vertex u)
@@ -67,21 +76,25 @@ namespace Graphs.Unweighted.Mutable
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
             return vertices[u].Count;
         }
-        public void SetEdge(Vertex u, Vertex v)
+        public void SetEdge(Vertex u, Vertex v, int weight)
         {
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
-            if (!vertices.ContainsKey(v)) throw new VertexNotFoundException();
-            vertices[u].SetEdge(v);
+            vertices[u].SetEdge(v, weight);
+        }
+        public int GetEdge(Vertex u, Vertex v)
+        {
+            if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
+            return vertices[u].GetEdge(v);
         }
         public void RemoveEdge(Vertex u, Vertex v)
         {
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
-            if (!vertices.ContainsKey(v)) throw new VertexNotFoundException();
             if (!vertices[u].HasEdge(v)) vertices[u].RemoveEdge(v);
         }
         public IEnumerable<Vertex> Vertices()
         {
             return vertices.Keys;
         }
+
     }
 }
