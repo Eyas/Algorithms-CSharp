@@ -9,11 +9,11 @@ namespace Graphs.Unweighted.Mutable
         private class AdjacentVertices
         {
             private HashSet<Vertex> adjacents = new HashSet<Vertex>();
-            public List<Vertex> Neighbors
+            public IEnumerable<Vertex> Neighbors
             {
                 get
                 {
-                    return adjacents.ToList<Vertex>();
+                    return adjacents;
                 }
             }
             public bool HasEdge(Vertex v)
