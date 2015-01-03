@@ -2,7 +2,7 @@
 
 namespace Graphs.Unweighted.Mutable
 {
-    public class UndirectedGraph : IUnweightedMutableGraph
+    public class UndirectedGraph : IUnweightedMutableGraph, IIncidentsGraph
     {
         private readonly IUnweightedMutableGraph _graph;
         public UndirectedGraph(IUnweightedMutableGraph graph)
@@ -16,6 +16,20 @@ namespace Graphs.Unweighted.Mutable
         public IEnumerable<Vertex> Neighbors(Vertex u)
         {
             return _graph.Neighbors(u);
+        }
+        public int Degree(Vertex u)
+        {
+            return _graph.Degree(u);
+        }
+        public IEnumerable<Vertex> Incidents(Vertex v)
+        {
+            // undirected -> neighbors == incidents
+            return _graph.Neighbors(v);
+        }
+        public int InDegree(Vertex v)
+        {
+            // undirected -> degree == indegree
+            return _graph.Degree(v);
         }
         public void SetEdge(Vertex u, Vertex v)
         {

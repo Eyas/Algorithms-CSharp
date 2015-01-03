@@ -16,6 +16,13 @@ namespace Graphs.Weighted.Mutable
                     return adjacents.Keys;
                 }
             }
+            public int Count
+            {
+                get
+                {
+                    return adjacents.Count;
+                }
+            }
             public bool HasEdge(Vertex v)
             {
                 return adjacents.ContainsKey(v);
@@ -63,6 +70,11 @@ namespace Graphs.Weighted.Mutable
         {
             if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
             return vertices[u].Neighbors;
+        }
+        public int Degree(Vertex u)
+        {
+            if (!vertices.ContainsKey(u)) throw new VertexNotFoundException();
+            return vertices[u].Count;
         }
         public void SetEdge(Vertex u, Vertex v, int weight)
         {

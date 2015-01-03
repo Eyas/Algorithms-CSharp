@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Graphs.Unweighted.Mutable
 {
-    public class AdjacencyMatrixGraph : IUnweightedMutableGraph
+    public class AdjacencyMatrixGraph : IUnweightedMutableGraph, IIncidentsGraph
     {
         private bool[,] adjacency;
         private Vertex[] vertices;
@@ -90,6 +90,18 @@ namespace Graphs.Unweighted.Mutable
             }
 
         }
+        public int Degree(Vertex u)
+        {
+            int _u = indices[u];
+            int degree = 0;
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (adjacency[_u, i])
+                    ++degree;
+            }
+            return degree;
+        }
         public IEnumerable<Vertex> Incidents(Vertex v)
         {
             int _v = indices[v];
@@ -100,6 +112,18 @@ namespace Graphs.Unweighted.Mutable
                     yield return vertices[i];
             }
 
+        }
+        public int InDegree(Vertex v)
+        {
+            int _v = indices[v];
+            int indegree = 0;
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (adjacency[i, _v])
+                    ++indegree;
+            }
+            return indegree;
         }
         public void SetEdge(Vertex u, Vertex v)
         {
