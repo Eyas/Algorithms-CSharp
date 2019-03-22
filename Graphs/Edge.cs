@@ -20,8 +20,7 @@ namespace Graphs
         }
         public override bool Equals(object obj)
         {
-            Edge other = obj as Edge;
-            if (other == null) return false;
+            if (!(obj is Edge other)) return false;
             return u.Equals(other.u) && v.Equals(other.v);
         }
         public override int GetHashCode()

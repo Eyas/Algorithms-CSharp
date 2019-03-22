@@ -1,93 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Graphs;
 using Graphs.Unweighted.Mutable;
 
 namespace UnitTests.GraphsTests.Unweighted.Mutable
 {
-    [TestClass]
+    
     public class AdjacencyMatrixGraphTests
     {
         #region Pre-defined vertices (s, t, u, v, w, x, y, z)
-        private static Vertex s = new Vertex("s");
-        private static Vertex t = new Vertex("t");
-        private static Vertex u = new Vertex("u");
-        private static Vertex v = new Vertex("v");
-        private static Vertex w = new Vertex("w");
-        private static Vertex x = new Vertex("x");
-        private static Vertex y = new Vertex("y");
-        private static Vertex z = new Vertex("z");
+        private static readonly Vertex s = new Vertex("s");
+        private static readonly Vertex t = new Vertex("t");
+        private static readonly Vertex u = new Vertex("u");
+        private static readonly Vertex v = new Vertex("v");
+        private static readonly Vertex w = new Vertex("w");
+        private static readonly Vertex x = new Vertex("x");
+        private static readonly Vertex y = new Vertex("y");
+        private static readonly Vertex z = new Vertex("z");
         #endregion
 
-        [TestMethod]
+        [Fact]
         public void MUAMGraphConstructor_Empty_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
-            Assert.IsNotNull(graph, "Empty graph was created");
-            Assert.IsTrue(Enumerable.Empty<Vertex>().SequenceEqual(graph.Vertices()), "Empty vertices list");
+            Assert.NotNull(graph); // "Empty graph was created"
+            Assert.True(Enumerable.Empty<Vertex>().SequenceEqual(graph.Vertices()), "Empty vertices list");
         }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void MUAMGraphConstructor_InvalidCapacity_ThrowsException()
         {
-            AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(0);
+            Assert.Throws(typeof(ArgumentException), () => new AdjacencyMatrixGraph(0));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphAddVertex_SimpleAdd_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(10);
             IEnumerable<Vertex> vertices;
-            Assert.AreEqual(0, graph.Vertices().Count());
+            Assert.Equal(0, graph.Vertices().Count());
 
             graph.AddVertex(u);
             vertices = graph.Vertices();
-            Assert.AreEqual(1, vertices.Count());
-            Assert.IsTrue(vertices.Contains(u));
+            Assert.Equal(1, vertices.Count());
+            Assert.True(vertices.Contains(u));
 
             graph.AddVertex(v);
             vertices = graph.Vertices();
-            Assert.AreEqual(2, vertices.Count());
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
+            Assert.Equal(2, vertices.Count());
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphAddVertex_DuplicateAdd_Ignored()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(10);
             IEnumerable<Vertex> vertices;
-            Assert.AreEqual(0, graph.Vertices().Count());
+            Assert.Equal(0, graph.Vertices().Count());
 
             graph.AddVertex(u);
             vertices = graph.Vertices();
-            Assert.AreEqual(1, vertices.Count());
-            Assert.IsTrue(vertices.Contains(u));
+            Assert.Equal(1, vertices.Count());
+            Assert.True(vertices.Contains(u));
 
             graph.AddVertex(v);
             vertices = graph.Vertices();
-            Assert.AreEqual(2, vertices.Count());
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
+            Assert.Equal(2, vertices.Count());
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
 
             graph.AddVertex(v);
             vertices = graph.Vertices();
-            Assert.AreEqual(2, vertices.Count());
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
+            Assert.Equal(2, vertices.Count());
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
 
             graph.AddVertex(u);
             vertices = graph.Vertices();
-            Assert.AreEqual(2, vertices.Count());
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
+            Assert.Equal(2, vertices.Count());
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphAddVertex_Growth_VerticesAndEdgesIntact()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(3);
             IEnumerable<Vertex> vertices;
-            Assert.AreEqual(0, graph.Vertices().Count());
+            Assert.Equal(0, graph.Vertices().Count());
 
             graph.AddVertex(s);
             graph.AddVertex(t);
@@ -104,24 +103,24 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             graph.AddVertex(v);
 
             vertices = graph.Vertices();
-            Assert.AreEqual(4, graph.Vertices().Count());
-            Assert.IsTrue(vertices.Contains(s));
-            Assert.IsTrue(vertices.Contains(t));
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
+            Assert.Equal(4, graph.Vertices().Count());
+            Assert.True(vertices.Contains(s));
+            Assert.True(vertices.Contains(t));
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
 
-            Assert.IsTrue(graph.HasEdge(s, t));
-            Assert.IsTrue(graph.HasEdge(t, u));
-            Assert.IsTrue(graph.HasEdge(u, s));
-            Assert.IsTrue(graph.HasEdge(t, t));
+            Assert.True(graph.HasEdge(s, t));
+            Assert.True(graph.HasEdge(t, u));
+            Assert.True(graph.HasEdge(u, s));
+            Assert.True(graph.HasEdge(t, t));
 
-            Assert.IsFalse(graph.HasEdge(s, s));
-            Assert.IsFalse(graph.HasEdge(s, u));
-            Assert.IsFalse(graph.HasEdge(t, s));
-            Assert.IsFalse(graph.HasEdge(u, t));
-            Assert.IsFalse(graph.HasEdge(u, u));
+            Assert.False(graph.HasEdge(s, s));
+            Assert.False(graph.HasEdge(s, u));
+            Assert.False(graph.HasEdge(t, s));
+            Assert.False(graph.HasEdge(u, t));
+            Assert.False(graph.HasEdge(u, u));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphRemoveVertex_SimpleRemove_Succeeds()
         {
             // u --> v --> w   x <---> y --> z
@@ -132,10 +131,10 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             AdjacencyMatrixGraph graph = CreateGraph();
 
             graph.RemoveVertex(v);
-            Assert.IsFalse(graph.Vertices().Contains(v));
-            Assert.IsFalse(graph.Neighbors(u).Contains(v));
+            Assert.False(graph.Vertices().Contains(v));
+            Assert.False(graph.Neighbors(u).Contains(v));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphRemoveVertex_RemoveThenAddAnother_IsClean()
         {
             // An 'Add' after a 'Remove' reuses the old index, make
@@ -152,11 +151,11 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             graph.RemoveVertex(v);
             graph.AddVertex(t);
 
-            Assert.IsFalse(graph.Vertices().Contains(v));
-            Assert.IsFalse(graph.Neighbors(u).Contains(t));
-            Assert.AreEqual(0, graph.Neighbors(t).Count());
+            Assert.False(graph.Vertices().Contains(v));
+            Assert.False(graph.Neighbors(u).Contains(t));
+            Assert.Equal(0, graph.Neighbors(t).Count());
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphSetEdge_UnconnectedGraph_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
@@ -165,20 +164,19 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
 
             graph.SetEdge(u, v);
 
-            Assert.IsTrue(graph.HasEdge(u, v));
-            Assert.IsFalse(graph.HasEdge(v, u));
+            Assert.True(graph.HasEdge(u, v));
+            Assert.False(graph.HasEdge(v, u));
         }
-        [TestMethod]
-        [ExpectedException(typeof(KeyNotFoundException))]
+        [Fact]
         public void MUAMGraphSetEdge_MissingVertex_Fails()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
             graph.AddVertex(u);
             graph.AddVertex(v);
 
-            graph.SetEdge(u, t);
+            Assert.Throws(typeof(KeyNotFoundException), () => graph.SetEdge(u, t));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphRemoveEdge_SetAndRemove_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
@@ -188,26 +186,26 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             graph.SetEdge(u, v);
             graph.RemoveEdge(u, v);
 
-            Assert.IsFalse(graph.HasEdge(u, v));
-            Assert.IsFalse(graph.HasEdge(v, u));
+            Assert.False(graph.HasEdge(u, v));
+            Assert.False(graph.HasEdge(v, u));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphHasEdge_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
 
-            Assert.IsTrue(graph.HasEdge(u, v));
-            Assert.IsTrue(graph.HasEdge(u, w));
-            Assert.IsTrue(graph.HasEdge(u, z));
-            Assert.IsTrue(graph.HasEdge(v, w));
-            Assert.IsTrue(graph.HasEdge(x, y));
-            Assert.IsTrue(graph.HasEdge(y, x));
-            Assert.IsTrue(graph.HasEdge(y, z));
+            Assert.True(graph.HasEdge(u, v));
+            Assert.True(graph.HasEdge(u, w));
+            Assert.True(graph.HasEdge(u, z));
+            Assert.True(graph.HasEdge(v, w));
+            Assert.True(graph.HasEdge(x, y));
+            Assert.True(graph.HasEdge(y, x));
+            Assert.True(graph.HasEdge(y, z));
 
-            Assert.IsFalse(graph.HasEdge(v, u));
-            Assert.IsFalse(graph.HasEdge(u, x));
+            Assert.False(graph.HasEdge(v, u));
+            Assert.False(graph.HasEdge(u, x));
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphNeighbors_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
@@ -215,33 +213,33 @@ namespace UnitTests.GraphsTests.Unweighted.Mutable
             IEnumerable<Vertex> xNeighbors = graph.Neighbors(x);
             IEnumerable<Vertex> zNeighbors = graph.Neighbors(z);
 
-            Assert.IsTrue(uNeighbors.Contains(v));
-            Assert.IsTrue(uNeighbors.Contains(w));
-            Assert.IsTrue(uNeighbors.Contains(z));
-            Assert.IsFalse(uNeighbors.Contains(y));
+            Assert.True(uNeighbors.Contains(v));
+            Assert.True(uNeighbors.Contains(w));
+            Assert.True(uNeighbors.Contains(z));
+            Assert.False(uNeighbors.Contains(y));
 
-            Assert.IsTrue(xNeighbors.Contains(y));
-            Assert.IsFalse(xNeighbors.Contains(u));
+            Assert.True(xNeighbors.Contains(y));
+            Assert.False(xNeighbors.Contains(u));
 
-            Assert.AreEqual(0, zNeighbors.Count());
+            Assert.Equal(0, zNeighbors.Count());
         }
-        [TestMethod]
+        [Fact]
         public void MUAMGraphVertices_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
             HashSet<Vertex> vertices = new HashSet<Vertex>(graph.Vertices());
 
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
-            Assert.IsTrue(vertices.Contains(w));
-            Assert.IsTrue(vertices.Contains(x));
-            Assert.IsTrue(vertices.Contains(y));
-            Assert.IsTrue(vertices.Contains(z));
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
+            Assert.True(vertices.Contains(w));
+            Assert.True(vertices.Contains(x));
+            Assert.True(vertices.Contains(y));
+            Assert.True(vertices.Contains(z));
 
-            Assert.IsFalse(vertices.Contains(s));
-            Assert.IsFalse(vertices.Contains(t));
+            Assert.False(vertices.Contains(s));
+            Assert.False(vertices.Contains(t));
 
-            Assert.AreEqual(6, vertices.Count);
+            Assert.Equal(6, vertices.Count);
         }
         #region Helper Methods
         public AdjacencyMatrixGraph CreateGraph()

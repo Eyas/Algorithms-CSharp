@@ -6,9 +6,9 @@ namespace Graphs.Unweighted.Immutable
 {
     public class AdjacencyMatrixGraph : IUnweightedGraph, IIncidentsGraph
     {
-        private bool[,] adjacency;
+        private readonly bool[,] adjacency;
         private Vertex[] vertices;
-        private Dictionary<Vertex, int> indices = new Dictionary<Vertex, int>();
+        private readonly Dictionary<Vertex, int> indices = new Dictionary<Vertex, int>();
 
         public AdjacencyMatrixGraph(ISet<Vertex> V, ISet<Edge> E)
         {

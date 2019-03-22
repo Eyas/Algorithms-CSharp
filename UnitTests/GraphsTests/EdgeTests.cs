@@ -1,13 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Graphs;
-
 namespace UnitTests.GraphsTests
 {
-    [TestClass]
     public class EdgeTests
     {
-        [TestMethod]
+        [Fact]
         public void EdgeConstructorTest()
         {
             Vertex u = new Vertex("vertex1");
@@ -17,16 +15,16 @@ namespace UnitTests.GraphsTests
             Edge e1 = new Edge(u, v);
             Edge e2 = new Edge(u, v, w);
 
-            Assert.AreEqual(u, e1.u);
-            Assert.AreEqual(v, e1.v);
-            Assert.IsFalse(e1.weight.HasValue);
+            Assert.Equal(u, e1.u);
+            Assert.Equal(v, e1.v);
+            Assert.False(e1.weight.HasValue);
 
-            Assert.AreEqual(u, e2.u);
-            Assert.AreEqual(v, e2.v);
-            Assert.IsTrue(e2.weight.HasValue);
-            Assert.AreEqual(w, e2.weight);
+            Assert.Equal(u, e2.u);
+            Assert.Equal(v, e2.v);
+            Assert.True(e2.weight.HasValue);
+            Assert.Equal(w, e2.weight);
         }
-        [TestMethod]
+        [Fact]
         public void EdgeEqualsTest()
         {
             Vertex u = new Vertex("vertex1");
@@ -45,23 +43,20 @@ namespace UnitTests.GraphsTests
             Edge vu5 = new Edge(v, u, five);
             Edge vu6 = new Edge(v, u, six);
 
-            Assert.AreEqual(new Edge(u, v), uv);
-            Assert.AreEqual(new Edge(u, v, five), uv);
-            Assert.AreEqual(new Edge(u, v, five), uv5);
-            Assert.AreEqual(new Edge(u, v, six), uv5);
+            Assert.Equal(new Edge(u, v), uv);
+            Assert.Equal(new Edge(u, v, five), uv);
+            Assert.Equal(new Edge(u, v, five), uv5);
+            Assert.Equal(new Edge(u, v, six), uv5);
 
-            Assert.AreEqual(new Edge(new Vertex("vertex1"), new Vertex("vertex2")), uv);
+            Assert.Equal(new Edge(new Vertex("vertex1"), new Vertex("vertex2")), uv);
 
-            Assert.AreNotEqual(uv, vw);
-            Assert.AreNotEqual(uv, vu);
-            Assert.AreNotEqual(vw, vu);
-            Assert.AreNotEqual(uv5, vw);
-            Assert.AreNotEqual(uv5, vu);
-
-            Assert.AreNotEqual(five, uv5);
-            Assert.AreNotEqual(uv5, five);
+            Assert.NotEqual(uv, vw);
+            Assert.NotEqual(uv, vu);
+            Assert.NotEqual(vw, vu);
+            Assert.NotEqual(uv5, vw);
+            Assert.NotEqual(uv5, vu);
         }
-        [TestMethod]
+        [Fact]
         public void EdgeHashCodeTest()
         {
             Vertex u = new Vertex("vertex1");
@@ -70,10 +65,10 @@ namespace UnitTests.GraphsTests
             Edge uv = new Edge(u, v);
             Edge vu = new Edge(v, u);
 
-            Assert.AreEqual((new Edge(u, v)).GetHashCode(), uv.GetHashCode());
-            Assert.AreEqual((new Edge(v, u)).GetHashCode(), vu.GetHashCode());
+            Assert.Equal((new Edge(u, v)).GetHashCode(), uv.GetHashCode());
+            Assert.Equal((new Edge(v, u)).GetHashCode(), vu.GetHashCode());
         }
-        [TestMethod]
+        [Fact]
         public void EdgeToStringTest()
         {
             Vertex u = new Vertex("vertex1");
@@ -84,9 +79,9 @@ namespace UnitTests.GraphsTests
             Edge vu = new Edge(v, u);
             Edge uv5 = new Edge(u, v, five);
 
-            Assert.AreEqual("Edge(vertex1,vertex2)", uv.ToString());
-            Assert.AreEqual("Edge(vertex1,vertex2)", uv5.ToString());
-            Assert.AreEqual("Edge(vertex2,vertex1)", vu.ToString());
+            Assert.Equal("Edge(vertex1,vertex2)", uv.ToString());
+            Assert.Equal("Edge(vertex1,vertex2)", uv5.ToString());
+            Assert.Equal("Edge(vertex2,vertex1)", vu.ToString());
         }
     }
 }

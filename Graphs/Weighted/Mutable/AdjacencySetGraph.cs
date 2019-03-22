@@ -29,8 +29,7 @@ namespace Graphs.Weighted.Mutable
             }
             public int GetEdge(Vertex v)
             {
-                int weight;
-                if (adjacents.TryGetValue(v, out weight))
+                if (adjacents.TryGetValue(v, out int weight))
                 {
                     return weight;
                 }

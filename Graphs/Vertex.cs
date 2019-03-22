@@ -12,8 +12,7 @@ namespace Graphs
         }
         public override bool Equals(object obj)
         {
-            Vertex other = obj as Vertex;
-            if (other == null) return false;
+            if (!(obj is Vertex other)) return false;
             return _name.Equals(other._name);
         }
         public override int GetHashCode()

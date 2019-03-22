@@ -39,8 +39,7 @@ namespace Algorithms
 
             while (true)
             {
-                IDictionary<Vertex, Vertex> path;
-                int capacity = BreadthFirstSearch(graph, source, target, legalFlows, out path);
+                int capacity = BreadthFirstSearch(graph, source, target, legalFlows, out IDictionary<Vertex, Vertex> path);
 
                 if (capacity == 0) break;
                 f += capacity;

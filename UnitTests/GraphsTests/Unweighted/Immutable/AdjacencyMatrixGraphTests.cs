@@ -1,63 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Graphs;
 using Graphs.Unweighted.Immutable;
 
 namespace UnitTests.GraphsTests.Unweighted.Immutable
 {
-    [TestClass]
     public class AdjacencyMatrixGraphTests
     {
         #region Pre-defined vertices (s, t, u, v, w, x, y, z)
-        private static Vertex s = new Vertex("s");
-        private static Vertex t = new Vertex("t");
-        private static Vertex u = new Vertex("u");
-        private static Vertex v = new Vertex("v");
-        private static Vertex w = new Vertex("w");
-        private static Vertex x = new Vertex("x");
-        private static Vertex y = new Vertex("y");
-        private static Vertex z = new Vertex("z");
+        private static readonly Vertex s = new Vertex("s");
+        private static readonly Vertex t = new Vertex("t");
+        private static readonly Vertex u = new Vertex("u");
+        private static readonly Vertex v = new Vertex("v");
+        private static readonly Vertex w = new Vertex("w");
+        private static readonly Vertex x = new Vertex("x");
+        private static readonly Vertex y = new Vertex("y");
+        private static readonly Vertex z = new Vertex("z");
         #endregion
 
-        [TestMethod]
+        [Fact]
         public void IUAMGraphConstructor_Empty_Succeeds()
         {
             AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(new HashSet<Vertex>(), new HashSet<Edge>());
-            Assert.IsNotNull(graph, "Empty graph was not created");
+            Assert.NotNull(graph); // Empty graph was not created
         }
-        [TestMethod]
-        [ExpectedException(typeof(KeyNotFoundException))]
+        [Fact]
         public void IUAMGraphConstructor_MissingVertex_Fails()
         {
-            HashSet<Vertex> V = new HashSet<Vertex>();
-            V.Add(u);
-            V.Add(v);
+            HashSet<Vertex> V = new HashSet<Vertex>
+            {
+                u,
+                v
+            };
 
-            HashSet<Edge> E = new HashSet<Edge>();
-            E.Add(new Edge(u, v));
-            E.Add(new Edge(u, w));
+            HashSet<Edge> E = new HashSet<Edge>
+            {
+                new Edge(u, v),
+                new Edge(u, w)
+            };
 
-            AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(V, E);
+            Assert.Throws(typeof(KeyNotFoundException), () => new AdjacencyMatrixGraph(V, E));
         }
-        [TestMethod]
+        [Fact]
         public void IUAMGraphHasEdge_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
 
-            Assert.IsTrue(graph.HasEdge(u, v));
-            Assert.IsTrue(graph.HasEdge(u, w));
-            Assert.IsTrue(graph.HasEdge(u, z));
-            Assert.IsTrue(graph.HasEdge(v, w));
-            Assert.IsTrue(graph.HasEdge(x, y));
-            Assert.IsTrue(graph.HasEdge(y, x));
-            Assert.IsTrue(graph.HasEdge(y, z));
+            Assert.True(graph.HasEdge(u, v));
+            Assert.True(graph.HasEdge(u, w));
+            Assert.True(graph.HasEdge(u, z));
+            Assert.True(graph.HasEdge(v, w));
+            Assert.True(graph.HasEdge(x, y));
+            Assert.True(graph.HasEdge(y, x));
+            Assert.True(graph.HasEdge(y, z));
 
-            Assert.IsFalse(graph.HasEdge(v, u));
-            Assert.IsFalse(graph.HasEdge(u, x));
+            Assert.False(graph.HasEdge(v, u));
+            Assert.False(graph.HasEdge(u, x));
         }
-        [TestMethod]
+        [Fact]
         public void IUAMGraphNeighbors_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
@@ -65,33 +67,33 @@ namespace UnitTests.GraphsTests.Unweighted.Immutable
             IEnumerable<Vertex> xNeighbors = graph.Neighbors(x);
             IEnumerable<Vertex> zNeighbors = graph.Neighbors(z);
 
-            Assert.IsTrue(uNeighbors.Contains(v));
-            Assert.IsTrue(uNeighbors.Contains(w));
-            Assert.IsTrue(uNeighbors.Contains(z));
-            Assert.IsFalse(uNeighbors.Contains(y));
+            Assert.True(uNeighbors.Contains(v));
+            Assert.True(uNeighbors.Contains(w));
+            Assert.True(uNeighbors.Contains(z));
+            Assert.False(uNeighbors.Contains(y));
 
-            Assert.IsTrue(xNeighbors.Contains(y));
-            Assert.IsFalse(xNeighbors.Contains(u));
+            Assert.True(xNeighbors.Contains(y));
+            Assert.False(xNeighbors.Contains(u));
 
-            Assert.AreEqual(0, zNeighbors.Count());
+            Assert.Equal(0, zNeighbors.Count());
         }
-        [TestMethod]
+        [Fact]
         public void IUAMGraphVertices_RegularGraph_Test()
         {
             AdjacencyMatrixGraph graph = CreateGraph();
             HashSet<Vertex> vertices = new HashSet<Vertex>(graph.Vertices());
 
-            Assert.IsTrue(vertices.Contains(u));
-            Assert.IsTrue(vertices.Contains(v));
-            Assert.IsTrue(vertices.Contains(w));
-            Assert.IsTrue(vertices.Contains(x));
-            Assert.IsTrue(vertices.Contains(y));
-            Assert.IsTrue(vertices.Contains(z));
+            Assert.True(vertices.Contains(u));
+            Assert.True(vertices.Contains(v));
+            Assert.True(vertices.Contains(w));
+            Assert.True(vertices.Contains(x));
+            Assert.True(vertices.Contains(y));
+            Assert.True(vertices.Contains(z));
 
-            Assert.IsFalse(vertices.Contains(s));
-            Assert.IsFalse(vertices.Contains(t));
+            Assert.False(vertices.Contains(s));
+            Assert.False(vertices.Contains(t));
 
-            Assert.AreEqual(6, vertices.Count);
+            Assert.Equal(6, vertices.Count);
         }
         #region Helper Methods
         public AdjacencyMatrixGraph CreateGraph()
@@ -99,22 +101,26 @@ namespace UnitTests.GraphsTests.Unweighted.Immutable
             // u --> v --> w   x <---> y --> z
             // |           ^                 ^
             //  \---------/-----------------/
-            HashSet<Vertex> V = new HashSet<Vertex>();
-            V.Add(u);
-            V.Add(v);
-            V.Add(w);
-            V.Add(x);
-            V.Add(y);
-            V.Add(z);
+            HashSet<Vertex> V = new HashSet<Vertex>
+            {
+                u,
+                v,
+                w,
+                x,
+                y,
+                z
+            };
 
-            HashSet<Edge> E = new HashSet<Edge>();
-            E.Add(new Edge(u, v));
-            E.Add(new Edge(u, w));
-            E.Add(new Edge(u, z));
-            E.Add(new Edge(v, w));
-            E.Add(new Edge(x, y));
-            E.Add(new Edge(y, x));
-            E.Add(new Edge(y, z));
+            HashSet<Edge> E = new HashSet<Edge>
+            {
+                new Edge(u, v),
+                new Edge(u, w),
+                new Edge(u, z),
+                new Edge(v, w),
+                new Edge(x, y),
+                new Edge(y, x),
+                new Edge(y, z)
+            };
 
             return new AdjacencyMatrixGraph(V, E);
         }
